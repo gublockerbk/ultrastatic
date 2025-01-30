@@ -13,7 +13,19 @@
     color: white;
     font-family: Arial, sans-serif;
 }
+/* Animated Heading */
+h2 {
+    font-size: 2rem;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeIn 1s forwards;
+    transition: 0.3s ease-in-out;
+}
 
+h2:hover {
+    color: grey;
+    transform: scale(1.1);
+}
 /* Animated Heading */
 h1 {
     font-size: 3rem;
@@ -169,9 +181,11 @@ h1:hover {
         }
 </script>
 <h1>
-  UltraStatic V1
+  UltraStatic
 </h1>
-
+<h2>
+The Future Of Proxies. Made Static.
+</h2>
 
 <form id="uv-form">
             <input   class="input" placeholder="Seach Google" id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden"/> 
