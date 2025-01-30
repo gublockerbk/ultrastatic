@@ -1,6 +1,32 @@
 <head>
 <style>
 /* Dark Theme Search Bar */
+	body {
+    background: black;
+    overflow: hidden;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+/* Animated Heading */
+h1 {
+    font-size: 3rem;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeIn 1s forwards;
+    transition: 0.3s ease-in-out;
+}
+
+h1:hover {
+    color: cyan;
+    transform: scale(1.1);
+}
 .input {
     padding: 12px 20px;
     font-size: 1.2rem;
