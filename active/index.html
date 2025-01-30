@@ -1,127 +1,68 @@
 <head>
 <style>
-body {
-    background: black;
-    overflow: hidden;
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    color: white;
-    font-family: Arial, sans-serif;
-}
-
-/* Animated Heading */
-h1 {
-    font-size: 3rem;
-    opacity: 0;
-    transform: translateY(-20px);
-    animation: fadeIn 1s forwards;
-    transition: 0.3s ease-in-out;
-}
-
-h1:hover {
-    color: cyan;
-    transform: scale(1.1);
-}
-
-/* Search Bar */
-.uv-adress {
-    padding: 10px 20px;
+/* Improved Search Bar */
+.input {
+    padding: 12px 20px;
     font-size: 1.2rem;
-    border: none;
+    border: 2px solid cyan;
     border-radius: 50px;
     outline: none;
-    width: 250px;
-    transition: 0.3s ease-in-out;
+    width: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    transition: all 0.3s ease-in-out;
 }
 
-.uv-adress:focus {
+.input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.input:focus {
     transform: scale(1.05);
-    box-shadow: 0 0 10px cyan;
+    box-shadow: 0 0 15px cyan;
+    background: rgba(255, 255, 255, 0.2);
 }
 
-/* Button */
+/* Improved Button */
 .button {
     margin-top: 20px;
-    padding: 10px 20px;
+    padding: 12px 25px;
     font-size: 1.2rem;
+    font-weight: bold;
     border: none;
-    background: cyan;
-    color: black;
+    background: linear-gradient(45deg, cyan, blue);
+    color: white;
     border-radius: 50px;
     cursor: pointer;
-    transition: 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.6s ease-in-out;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.button:hover::before {
+    transform: translate(-50%, -50%) scale(1);
 }
 
 .button:hover {
-    background: white;
-    color: black;
+    background: linear-gradient(45deg, blue, cyan);
     transform: scale(1.1);
 }
 
 .button:active {
     transform: scale(0.95);
-}
-
-/* Ripple Effect */
-.ripple {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    border: 2px solid cyan;
-    border-radius: 50%;
-    animation: rippleEffect 0.6s linear;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-}
-
-@keyframes rippleEffect {
-    from {
-        transform: scale(0);
-        opacity: 1;
-    }
-    to {
-        transform: scale(4);
-        opacity: 0;
-    }
-}
-
-/* Stars */
-.star {
-    position: absolute;
-    background: white;
-    border-radius: 50%;
-    opacity: 0.8;
-}
-
-/* Shooting Stars */
-.shooting-star {
-    position: absolute;
-    width: 2px;
-    height: 20px;
-    background: white;
-    animation: shootingStar 2s linear;
-}
-
-@keyframes shootingStar {
-    from {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    to {
-        transform: translateY(500px);
-        opacity: 0;
-    }
-}
-
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 
@@ -174,6 +115,7 @@ About:Blanker
 document.addEventListener("DOMContentLoaded", () => {
     const body = document.body;
     
+    // Ripple Effect on Click
     body.addEventListener("click", (e) => {
         const ripple = document.createElement("div");
         ripple.classList.add("ripple");
@@ -187,23 +129,24 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
     
+    // Create Stars
     const createStar = () => {
         const star = document.createElement("div");
         star.classList.add("star");
         document.body.appendChild(star);
         
-        const size = Math.random() * 2;
+        const size = Math.random() * 3 + 1;
         star.style.width = `${size}px`;
         star.style.height = `${size}px`;
         star.style.left = `${Math.random() * window.innerWidth}px`;
         star.style.top = `${Math.random() * window.innerHeight}px`;
         
-        setTimeout(() => star.remove(), 5000);
+        setTimeout(() => star.remove(), 7000);
     };
     
-    setInterval(createStar, 100);
+    setInterval(createStar, 80);
     
-
+    // Create Shooting Stars
     const createShootingStar = () => {
         const star = document.createElement("div");
         star.classList.add("shooting-star");
@@ -212,11 +155,39 @@ document.addEventListener("DOMContentLoaded", () => {
         star.style.left = `${Math.random() * window.innerWidth}px`;
         star.style.top = `-${Math.random() * 50}px`;
         
-        setTimeout(() => star.remove(), 2000);
+        setTimeout(() => star.remove(), 2500);
     };
     
-    setInterval(createShootingStar, 3000);
+    setInterval(createShootingStar, 5000);
+
+    // Update Ripple Effect Size
+    const style = document.createElement("style");
+    style.innerHTML = `
+        .ripple {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            border: 2px solid cyan;
+            border-radius: 50%;
+            animation: rippleEffect 0.6s linear;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+        }
+        
+        @keyframes rippleEffect {
+            from {
+                transform: scale(0);
+                opacity: 1;
+            }
+            to {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
 });
+
 </script>
 
 	            <script src="uv/uv.bundle.js" charset="UTF-8" defer></script>
